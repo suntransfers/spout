@@ -183,6 +183,17 @@ class Cell
     }
 
     /**
+     * Returns whether the given value looks like a formula
+     *
+     * @param $value
+     * @return bool whether the given value looks like a formula
+     */
+    public function isFormulaString()
+    {
+        return (strpos($this->value, '=') === 0);
+    }
+
+    /**
      * @return bool
      */
     public function isString()

@@ -212,12 +212,15 @@ EOD;
         $cellXML = '<c r="' . $columnLetters . $rowIndexOneBased . '"';
         $cellXML .= ' s="' . $styleId . '"';
 
+
         if ($cell->isString()) {
             $cellXML .= $this->getCellXMLFragmentForNonEmptyString($cell->getValue());
         } elseif ($cell->isBoolean()) {
             $cellXML .= ' t="b"><v>' . (int) ($cell->getValue()) . '</v></c>';
         } elseif ($cell->isNumeric()) {
             $cellXML .= '><v>' . $cell->getValue() . '</v></c>';
+        } elseif($cell->isFormulaString()){
+            $cellXML .= '><f>'.substr($cell->getValue(),1).'</f><v>0</v></c>';
         } elseif ($cell->isError() && is_string($cell->getValueEvenIfError())) {
             // only writes the error value if it's a string
             $cellXML .= ' t="e"><v>' . $cell->getValueEvenIfError() . '</v></c>';
