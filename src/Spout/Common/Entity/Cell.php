@@ -190,6 +190,11 @@ class Cell
         return $this->type === self::TYPE_STRING;
     }
 
+    public static function isFormulaString($value)
+    {
+        return (strpos($value,'=') === 0);
+    }
+
     /**
      * @return bool
      */
